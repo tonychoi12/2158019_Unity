@@ -8,27 +8,36 @@ public class PlayerController : MonoBehaviour
     private float fMaxPositionX = 10.0f;    // 플레이어가 좌우 이동시 게임창을 벗어나지 않도록 하는 Vector 최댓값 설정 변수
     private float fMinPositionX = -10.0f;   // 플레이어가 좌우 이동시 게임창을 벗어나지 않도록 하는 Vector 최솟값 설정 변수
     float fPositionX = 0.0f;                // 플레이어가 좌우 이동할 수 있는 X좌표 저장 변수
-    
-    
+
+
     void Start()
     {
         Application.targetFrameRate = 60;
     }
 
+    public void LButtonDown()
+    {
+        transform.Translate(-1, 0, 0);
+    }
+    public void RButtonDown()
+    {
+        transform.Translate(1, 0, 0);
+    }
+    
     void Update()
     {
-        //왼쪽 화살표를 눌렀을때
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        //왼쪽 화살표를 누르는 중에
+        if (Input.GetKey(KeyCode.LeftArrow)||Input.GetKey(KeyCode.A))
         {
-            // 왼쪽으로 1 움직인다.
-            transform.Translate(-1, 0, 0);
+            // 왼쪽으로 0.3 움직인다.
+            transform.Translate(-0.3f, 0, 0);
         }
 
-        //오른쪽 화살표를 눌렀을때 &&
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        //오른쪽 화살표를 누르는 중에
+        if (Input.GetKey(KeyCode.RightArrow)||Input.GetKey(KeyCode.D))
         {
-            // 오른쪽으로 1 움직인다.
-            transform.Translate(1, 0, 0);
+            // 오른쪽으로 0.3 움직인다.
+            transform.Translate(0.3f, 0, 0);
         }
         /*
           Mathf.Clamp(value, min, max) 메서드
@@ -40,5 +49,4 @@ public class PlayerController : MonoBehaviour
         fPositionX = Mathf.Clamp(transform.position.x, fMinPositionX, fMaxPositionX);
         transform.position = new Vector3(fPositionX, transform.position.y, transform.position.z);
     }
-    
 }

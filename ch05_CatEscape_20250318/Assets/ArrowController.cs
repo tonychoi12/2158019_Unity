@@ -57,9 +57,14 @@ public class ArrowController : MonoBehaviour
          *  - 미충돌 : 두 원의 중김 산 거리 d가 (r1 + r2)보다 크면 충돌하지 않음(d>r1+r2)
          *  - 충돌((fArrowPlayerDistance < fPlayerRadius + fPlayerRadius)이면 화살 오브젝트 소멸
          */
-
+        
         if (fArrowPlayerDistance < fPlayerRadius + fPlayerRadius)
         {
+            // 감독 스크립트에 플레이어와 화살이 충돌했다고 전달한다.
+            GameObject gDirector = GameObject.Find("GameDirector");
+            gDirector.GetComponent<GameDirector>().f_DecreaseHp();
+            
+            // 충돌했다면 화살을 지운다.
             Destroy(gameObject);
         }
     }
